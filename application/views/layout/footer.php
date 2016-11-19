@@ -2,7 +2,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p class="copyright">&copy; 2014 ThemeWagon.com</p>
+						<p class="copyright">&copy; <?php echo date('Y'); ?> ZetoAS</p>
 					</div>
 				</div>
 			</div>
@@ -13,10 +13,12 @@
 			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
 			<nav>
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="full-width.html">Blog</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<?php
+						//print_r($menu);
+						foreach($menu as $rmenu){
+					?>
+					<li><a href="<?php echo base_url().$rmenu['url']; ?>.aspx"><?php echo $rmenu['title']?></a></li>
+						<?php } ?>
 				</ul>
 			</nav>
 		</div>

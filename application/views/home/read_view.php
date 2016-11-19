@@ -6,10 +6,10 @@
 						<article class="post">
 							<header class="entry-header">
 								<h1 class="entry-title">
-									<a href="<?php echo base_url() ?>home/read/<?php echo $detail['pslug']; ?>"><?php echo $detail['title']; ?></a>
+									<a href="<?php echo base_url() ?>home/read/<?php echo $detail['pslug']; ?>.aspx"><?php echo $detail['title']; ?></a>
 								</h1>
 								<div class="entry-meta">
-									<span class="post-category"><a href="<?php echo base_url() ?>home/kategori/<?php echo $detail['cslug']; ?>"><?php echo $detail['cname']; ?></a></span>
+									<span class="post-category"><a href="<?php echo base_url() ?>home/kategori/<?php echo $detail['cslug']; ?>.aspx"><?php echo $detail['cname']; ?></a></span>
 			
 									<span class="post-date"><a href="#"><?php echo date("F d, Y", strtotime($detail['created_at'])); ?></a></span>
 			
@@ -27,7 +27,7 @@
 							<ul>
                                 <?php foreach ($artikel as $list) { ?>
 								<li>
-									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>"><?php echo $list['title']; ?></a>
+									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>.aspx"><?php echo $list['title']; ?></a>
 								</li>
                                 <?php } ?>
 							</ul>

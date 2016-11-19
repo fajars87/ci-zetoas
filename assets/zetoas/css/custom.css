@@ -817,3 +817,19 @@ figure {
 		min-height: 34px;
 	}
 }
+
+/* instagram */
+#rudr_instafeed{
+  list-style-type:none  
+}
+
+#rudr_instafeed li{
+  margin-top:15px;
+  margin-bottom: 15px;
+}
+
+#rudr_instafeed li img{
+  background: none;
+  max-width:100%;
+  max-height:100%;
+}

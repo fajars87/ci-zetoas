@@ -7,10 +7,10 @@
 						<article class="post">
 							<header class="entry-header">
 								<h1 class="entry-title">
-									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>"><?php echo $list['title']; ?></a>
+									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>.aspx"><?php echo $list['title']; ?></a>
 								</h1>
 								<div class="entry-meta">
-									<span class="post-category"><a href="<?php echo base_url() ?>home/kategori/<?php echo $list['cslug']; ?>"><?php echo $list['cname']; ?></a></span>
+									<span class="post-category"><a href="<?php echo base_url() ?>home/kategori/<?php echo $list['cslug']; ?>.aspx"><?php echo $list['cname']; ?></a></span>
 			
 									<span class="post-date"><a href="#"><?php echo date("F d, Y", strtotime($list['created_at'])); ?></a></span>
 			
@@ -20,7 +20,7 @@
 							<div class="entry-content clearfix">
 								<p><?php echo $list['excerpt']; ?></p>
 								<div class="read-more cl-effect-14">
-									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>" class="more-link">Continue reading <span class="meta-nav">→</span></a>
+									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>.aspx" class="more-link">Continue reading <span class="meta-nav">→</span></a>
 								</div>
 							</div>
 						</article>
@@ -32,7 +32,7 @@
 							<ul>
                                 <?php foreach ($artikel as $list) { ?>
 								<li>
-									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>"><?php echo $list['title']; ?></a>
+									<a href="<?php echo base_url() ?>home/read/<?php echo $list['pslug']; ?>.aspx"><?php echo $list['title']; ?></a>
 								</li>
                                 <?php } ?>
 							</ul>
