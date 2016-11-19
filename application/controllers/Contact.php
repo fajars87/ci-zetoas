@@ -44,15 +44,15 @@ class Contact extends CI_Controller {
 
 		$this->set_validation_rules();
 		$this->set_view_captcha_data();
-		$data = array('title'=>'Contact - Zeto-AS',
-			'user_det'	=>$this->menu_model->auser(), 
-			'menu'		=>$this->menu_model->menu(),
-			'isi'		=>'home/contact_view'
-			);
 
 
 		if($this->form_validation->run() == FALSE) {
 			// show the form
+			$data = array('title'=>'Contact - Zeto-AS',
+				'user_det'	=>$this->menu_model->auser(), 
+				'menu'		=>$this->menu_model->menu(),
+				'isi'		=>'home/contact_view'
+				);
 			$this->load->view('layout/wrapper', $data);
 
 		} else {
