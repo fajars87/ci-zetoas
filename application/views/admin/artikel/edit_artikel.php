@@ -25,24 +25,24 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" name="form1" method="post" action="<?php echo base_url() ?>admin/artikel/tambah">
+              <form role="form" name="form1" method="post" action="<?php echo base_url() ?>admin/artikel/edit">
                 <!-- judul -->
                 <div class="form-group">
                   <label>Judul</label>
-                  <input type="text" class="form-control" name="judul" placeholder="Judul ...">
+                  <input type="text" class="form-control" name="judul" placeholder="Judul ..." value="<?php echo $detail['title'] ?>">
                 </div>
 
                 <!-- ringkasan -->
                 <div class="form-group">
                   <label>Ringkasan</label>
-                  <textarea class="form-control" rows="3" name="ringkasan" placeholder="Ringkasan ..."></textarea>
+                  <textarea class="form-control" rows="3" name="ringkasan" placeholder="Ringkasan ..."><?php echo $detail['excerpt'] ?></textarea>
                 </div>
 
                 <!-- isi -->
                 <div class="form-group">
                   <label>Isi</label>
                     <div class="box-body pad">
-                        <textarea id="editor1" name="isi" rows="10" cols="80"></textarea>
+                        <textarea id="editor1" name="isi" rows="10" cols="80"><?php echo $detail['body'] ?></textarea>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                   <label>Kategori</label>
                   <select name="id_kategori" class="form-control">
                     <?php foreach($kategori as $klist){ ?>
-                    <option value="<?php echo $klist['id'] ?>"><?php echo $klist['name'] ?></option>
+                    <option value="<?php echo $klist['id'] ?>" <?php if ($klist['id'] == $detail['category_id']) { echo 'selected'; } ?>><?php echo $klist['name'] ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -60,14 +60,15 @@
                 <div class="form-group">
                   <label>Status</label>
                   <select name="status_artikel" class="form-control">
-                    <option value="PUBLISHED">Publikasikan</option>
-                    <option value="DRAFT">Simpan sebagai draft</option>
+                    <option value="PUBLISHED"<?php if ($detail['status'] == "PUBLISHED") { echo 'selected'; } ?>>Publikasikan</option>
+                    <option value="DRAFT"<?php if ($detail['status'] == "DRAFT") { echo 'selected'; } ?>>Simpan sebagai draft</option>
                   </select>
                 </div>
 
                 <!-- Id user -->
-                <input name="id_user" type="hidden" id="id_user" value="<?php echo $user_det['id']; ?>"> 
-
+                <input name="id_user" type="hidden" id="id_user" value="<?php echo $detail['author_id'] ?>">
+		            <input name="id_artikel" type="hidden" id="id_artikel" value="<?php echo $detail['id'] ?>"> 
+                
                 <div class="box-footer">
                     <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                 </div>

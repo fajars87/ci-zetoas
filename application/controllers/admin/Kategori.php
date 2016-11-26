@@ -1,9 +1,8 @@
 <?php if (! defined ('BASEPATH')) exit ('No direct script access allowed');
-class Artikel extends CI_Controller {
+class Kategori extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('admin/artikel_model');
 		$this->load->model('admin/user_model');
 		$this->load->model('admin/kategori_model');
 	}
@@ -12,11 +11,11 @@ class Artikel extends CI_Controller {
         // Berfungsi untuk mengecek apakah ada session user yang login
 		if ($this->session->userdata('email')) {
 			$queryuser = $this->user_model->login_user($this->session->userdata('email'));
-		    $query = $this->artikel_model->daftar_artikel();
-		    $data = array('title' 	=> 'Daftar Artikel - ZetoAS',
+		    $query = $this->kategori_model->daftar_kategori();
+		    $data = array('title' 	=> 'Daftar Kategori - ZetoAS',
                     'user_det' => $queryuser,
-					'artikel'	=> $query,
-					'isi' 		=> 'admin/artikel/artikel_view');
+					'kategori'	=> $query,
+					'isi' 		=> 'admin/kategori/kategori_view');
 		    $this->load->view('admin/layout/wrapper', $data);
         }
 		else{
@@ -27,40 +26,14 @@ class Artikel extends CI_Controller {
 
 	// Kode untuk menambah artikel
 	public function tambah() {
-        // Berfungsi untuk mengecek apakah ada session user yang login
-		if ($this->session->userdata('email')) {
-			$queryuser = $this->user_model->login_user($this->session->userdata('email'));
-            $this->form_validation->set_rules('judul','Judul','required');
-            $this->form_validation->set_rules('ringkasan','Ringkasan','required');
-            $this->form_validation->set_rules('isi','Isi artikel','required');
-
-            if ($this->form_validation->run() === FALSE) {
-                $data = array('title' 	=> 'Menambah Artikel - ZetoAS',
-                                'user_det' => $queryuser,
-								'kategori' => $this->user_model->kategori_model->daftar_kategori(),
-                                'isi'	=> 'admin/artikel/tambah_artikel'
-                                );
-                $this->load->view('admin/layout/wrapper', $data);
-            } else {
-
-                $slug = date("dmY-") . url_title($this->input->post('judul'), 'dash', TRUE);
-                $data = array (
-                    'title' 			=> $this->input->post('judul'),
-                    'slug' 				=> $slug,
-                    'excerpt'			=> $this->input->post('ringkasan'),
-                    'body'				=> $this->input->post('isi'),
-					'category_id'		=> $this->input->post('id_kategori'),
-                    'status'			=> $this->input->post('status_artikel'),
-                    'author_id'			=> $this->input->post('id_user')
-                    );
-                $this->artikel_model->tambah($data);
-                redirect(base_url().'admin/artikel/');
-            }
-        }
-		else{
-			// jika tidak ada maka akan dikembalikan ke halaman login
-			redirect('admin/login');
-		}
+        $this->_validate();
+        $slug = date("dmY-") . url_title($this->input->post('name'), 'dash', TRUE);
+        $data = array(
+                'name' => $this->input->post('name'),
+                'slug' => $slug
+            );
+        $insert = $this->kategori_model->save($data);
+        echo json_encode(array("status" => TRUE));
 	} // END FUNGSI TAMBAH
 	
 	// Kode untuk menampilkan halaman edit dan meng-update artikel
@@ -120,5 +93,26 @@ class Artikel extends CI_Controller {
 			redirect('admin/login');
 		}
 	} // END FUNGSI DELETE
+
+        private function _validate()
+    {
+        $data = array();
+        $data['error_string'] = array();
+        $data['inputerror'] = array();
+        $data['status'] = TRUE;
+ 
+        if($this->input->post('name') == '')
+        {
+            $data['inputerror'][] = 'name';
+            $data['error_string'][] = 'First name is required';
+            $data['status'] = FALSE;
+        }
+ 
+        if($data['status'] === FALSE)
+        {
+            echo json_encode($data);
+            exit();
+        }
+    }
 
 } // END CLASS ARTIKEL

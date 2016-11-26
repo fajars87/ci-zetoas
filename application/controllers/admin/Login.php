@@ -14,9 +14,10 @@ class Login extends CI_Controller {
 
 	// Berfungsi untuk melakukan validasi login
 	function validasi() { 
+		$salt = substr(md5($this->input->post('password')),24);
 		$data=array(
 			'email'=>$this->input->post('email'),
-			'password'=>$this->input->post('password')
+			'password'=> crypt($this->input->post('password'),$salt)
 			);
 
 		// Berfungsi untuk memanggil fungsi ambil_data pada class login_model

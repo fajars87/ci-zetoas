@@ -37,7 +37,7 @@ class Artikel_model extends CI_Model {
 
 	// Kode untuk melakukan fungsi Delete
 	public function delete_artikel($id) {
-		$this->db->where('is', $id);
+		$this->db->where('id', $id);
 		return $this->db->delete('posts');
 	}
 

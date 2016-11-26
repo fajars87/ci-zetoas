@@ -5,7 +5,7 @@ class Menu_model extends CI_Model {
 	}
 
 	public function menu() {
-		$query = $this->db->get('menu_items');
+		$query = $this->db->query('SELECT * FROM menu_items ORDER BY menu_items.order');
 	return $query->result_array();
     }
 

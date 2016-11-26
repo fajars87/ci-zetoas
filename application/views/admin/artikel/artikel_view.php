@@ -30,6 +30,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Judul</th>
                         <th>Status</th>
                         <th>Penulis</th>
@@ -40,6 +41,7 @@
                     <tbody>
                     <?php foreach($artikel as $list) { ?>
                     <tr>
+                        <td><?php echo $list['id']; ?></td>
                         <td><?php echo $list['title']; ?></td>
                         <td><?php echo $list['status']; ?>
                         </td>
@@ -51,6 +53,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
+                        <th>ID</th>
                         <th>Judul</th>
                         <th>Status</th>
                         <th>Penulis</th>

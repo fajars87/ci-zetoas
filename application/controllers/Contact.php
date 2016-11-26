@@ -58,11 +58,21 @@ class Contact extends CI_Controller {
 		} else {
 			// success! email it, assume it sent, then show contact success view.
 			if ($this->send_mail()) {
-				$this->show_view($this->successView);
+				$data = array('title'=>'Contact - Zeto-AS',
+					'user_det'	=>$this->menu_model->auser(), 
+					'menu'		=>$this->menu_model->menu(),
+					'isi'		=>'home/contact_sukses'
+					);
+				$this->load->view('layout/wrapper', $data);
 			}
 			else {
 				log_message("error","Contact form - Error sending email. Debug message: " . $this->email->print_debugger() . " from: {$this->input->post('email')}. Message: {$this->input->post('message')}");
-				$this->show_view($this->errorView);
+				$data = array('title'=>'Contact - Zeto-AS',
+					'user_det'	=>$this->menu_model->auser(), 
+					'menu'		=>$this->menu_model->menu(),
+					'isi'		=>'home/contact_gagal'
+					);
+				$this->load->view('layout/wrapper', $data);
 
 			}
 

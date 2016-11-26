@@ -13,10 +13,9 @@
 								<div class="height-40px"></div>
 								<h2 class="title text-center">Social</h2>
 								<ul class="social">
-									<li class="facebook"><a href="#"><span class="ion-social-facebook"></span></a></li>
-									<li class="twitter"><a href="#"><span class="ion-social-twitter"></span></a></li>
-									<li class="google-plus"><a href="#"><span class="ion-social-googleplus"></span></a></li>
-									<li class="tumblr"><a href="#"><span class="ion-social-tumblr"></span></a></li>
+									<li class="facebook"><a href="<?php echo $about['facebook']; ?>"><span class="ion-social-facebook"></span></a></li>
+									<li class="twitter"><a href="<?php echo $about['twitter']; ?>"><span class="ion-social-twitter"></span></a></li>
+									<li class="tumblr"><a href="<?php echo $about['instagram']; ?> "><span class="ion-social-instagram"></span></a></li>
 								</ul>
 							</div>
 						</article>
