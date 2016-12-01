@@ -3,11 +3,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Artikel
+        Kategori
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Artikel</li>
+        <li class="active">Kategori</li>
       </ol>
     </section>
 
@@ -16,7 +16,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" onclick="add_kategori()"><i class="glyphicon glyphicon-plus"></i> Add Person</button>
+          <h3 class="box-title"><a href="<?php echo base_url() ?>admin/kategori/tambah" class="tambah"><i class="fa fa-plus"></i> Tambah Kategori</a></h3>
         
         </div>
         <div class="col-xs-12">
@@ -80,14 +80,6 @@ $(document).ready(function() {
  
     //set input/textarea/select event when change value, remove class error and remove text help block 
     $("input").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("textarea").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("select").change(function(){
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();
     });

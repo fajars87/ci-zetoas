@@ -32,7 +32,6 @@
   $(function () {
     $("#example1").DataTable();
     CKEDITOR.replace('editor1');
-})
   });
 </script>
 

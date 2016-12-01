@@ -10,7 +10,7 @@
         <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li><a href="<?php echo base_url(); ?>admin/artikel"><i class="fa fa-sticky-note"></i> <span>Artikel</span></a></li>
         <li><a href="<?php echo base_url(); ?>admin/kategori"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
-        <li><a href="<?php echo base_url(); ?>admin/pengaturan"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li>
+        <li><a href="<?php echo base_url(); ?>admin/setting"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

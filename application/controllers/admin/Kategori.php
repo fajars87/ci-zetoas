@@ -26,14 +26,32 @@ class Kategori extends CI_Controller {
 
 	// Kode untuk menambah artikel
 	public function tambah() {
-        $this->_validate();
-        $slug = date("dmY-") . url_title($this->input->post('name'), 'dash', TRUE);
-        $data = array(
-                'name' => $this->input->post('name'),
-                'slug' => $slug
-            );
-        $insert = $this->kategori_model->save($data);
-        echo json_encode(array("status" => TRUE));
+        // Berfungsi untuk mengecek apakah ada session user yang login
+		if ($this->session->userdata('email')) {
+			$queryuser = $this->user_model->login_user($this->session->userdata('email'));
+            $this->form_validation->set_rules('name','Name','required');
+
+            if ($this->form_validation->run() === FALSE) {
+                $data = array('title' 	=> 'Menambah Kategori - ZetoAS',
+                                'user_det' => $queryuser,
+                                'isi'	=> 'admin/kategori/tambah_kategori'
+                                );
+                $this->load->view('admin/layout/wrapper', $data);
+            } else {
+
+                $slug = date("dmY-") . url_title($this->input->post('name'), 'dash', TRUE);
+                $data = array (
+                    'name' 			=> $this->input->post('name'),
+                    'slug' 				=> $slug
+                    );
+                $this->kategori_model->tambah($data);
+                redirect(base_url().'admin/kategori/');
+            }
+        }
+		else{
+			// jika tidak ada maka akan dikembalikan ke halaman login
+			redirect('admin/login');
+		}
 	} // END FUNGSI TAMBAH
 	
 	// Kode untuk menampilkan halaman edit dan meng-update artikel
@@ -41,37 +59,27 @@ class Kategori extends CI_Controller {
         // Berfungsi untuk mengecek apakah ada session user yang login
 		if ($this->session->userdata('email')) {
 			$queryuser = $this->user_model->login_user($this->session->userdata('email'));
-			$this->form_validation->set_rules('judul', 'Judul', 'required');
-			$this->form_validation->set_rules('ringkasan', 'Ringkasan', 'required');
-			$this->form_validation->set_rules('isi', 'Isi Artikel','required');
+			$this->form_validation->set_rules('name', 'Name', 'required');
 
 			if ($this->form_validation->run() === FALSE) {
-				$data['artikel']	= $this->artikel_model->detail_artikel();
-				$data['detail']		= $this->artikel_model->detail_artikel($id);
+				$data['detail']		= $this->kategori_model->detail_kategori($id);
 				$data = array (
-					'title' 	=> 'Update Artikel : '.$data['detail']['title'],
+					'title' 	=> 'Update Kategori : '.$data['detail']['name'],
                     'user_det' => $queryuser,
-					'artikel'	=> $this->artikel_model->detail_artikel(),
-					'kategori' => $this->user_model->kategori_model->daftar_kategori(),
-					'detail'	=> $this->artikel_model->detail_artikel($id),
-					'isi'		=> 'admin/artikel/edit_artikel'
+					'detail'	=> $this->kategori_model->detail_kategori($id),
+					'isi'		=> 'admin/kategori/edit_kategori'
 					);
 				$this->load->view('admin/layout/wrapper', $data);
 				// Jika tidak terjadi error maka artikel akan diupdate
 			}else{
-				$slug = date("dmY-") . url_title($this->input->post('judul'), 'dash', TRUE);
+				$slug = date("dmY-") . url_title($this->input->post('name'), 'dash', TRUE);
 				$data = array (
-					'id'				=> $this->input->post('id_artikel'),
-					'title' 			=> $this->input->post('judul'),
-                    'slug' 				=> $slug,
-                    'excerpt'			=> $this->input->post('ringkasan'),
-                    'body'				=> $this->input->post('isi'),
-					'category_id'		=> $this->input->post('id_kategori'),
-                    'status'			=> $this->input->post('status_artikel'),
-                    'author_id'			=> $this->input->post('id_user')
+					'id'				=> $this->input->post('id'),
+					'name' 				=> $this->input->post('name'),
+                    'slug' 				=> $slug
 					);
-				$this->artikel_model->edit_artikel($data);
-				redirect(base_url().'admin/artikel/');
+				$this->kategori_model->edit_kategori($data);
+				redirect(base_url().'admin/kategori/');
 			}	
         }
 		else{
@@ -85,34 +93,13 @@ class Kategori extends CI_Controller {
         // Berfungsi untuk mengecek apakah ada session user yang login
 		if ($this->session->userdata('email')) {
 			$queryuser = $this->user_model->login_user($this->session->userdata('email'));
-			$this->artikel_model->delete_artikel($id);
-			redirect(base_url().'admin/artikel/');
+			$this->kategori_model->delete_kategori($id);
+			redirect(base_url().'admin/kategori/');
         }
 		else{
 			// jika tidak ada maka akan dikembalikan ke halaman login
 			redirect('admin/login');
 		}
 	} // END FUNGSI DELETE
-
-        private function _validate()
-    {
-        $data = array();
-        $data['error_string'] = array();
-        $data['inputerror'] = array();
-        $data['status'] = TRUE;
- 
-        if($this->input->post('name') == '')
-        {
-            $data['inputerror'][] = 'name';
-            $data['error_string'][] = 'First name is required';
-            $data['status'] = FALSE;
-        }
- 
-        if($data['status'] === FALSE)
-        {
-            echo json_encode($data);
-            exit();
-        }
-    }
 
 } // END CLASS ARTIKEL
